@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxScore(string s) {
+        priority_queue<int> pq;
+        
+
+        for(int i=0; i<s.size(); i++){
+            int zsum=0;
+            int osum=0;
+            int tsum=0;
+            for(int j=0; j<=i && i!=s.size()-1; j++){
+                if(s[j]=='0')zsum++;
+            }
+            for(int k=i+1; k<s.size(); k++){
+                if(s[k]=='1')osum++;
+            }
+            tsum=zsum+osum;
+            pq.push(tsum);
+        }
+        return pq.top();
+    }
+};

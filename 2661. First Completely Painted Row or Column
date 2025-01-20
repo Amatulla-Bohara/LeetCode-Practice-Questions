@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
+        int col = mat[0].size();
+        int row = mat.size();
+        int ans=0;
+        
+        unordered_map<int, pair<int, int>> mp;
+
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                mp[mat[i][j]].first=i;
+                mp[mat[i][j]].second=j;
+            }
+        }
+
+        vector<int> mat_row (row, 0);
+        vector<int> mat_col (col, 0);
+
+        for(int i=0; i<arr.size(); i++){
+            int r = mp[arr[i]].first;
+            int c = mp[arr[i]].second;
+            mat_row[r]++;
+            mat_col[c]++;
+            if(mat_row[r]==col || mat_col[c]==row) {
+                ans=i;
+                break;
+            }
+        }
+        return ans;
+    }
+};

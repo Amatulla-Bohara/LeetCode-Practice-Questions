@@ -1,0 +1,20 @@
+class Solution {
+public:
+    long long gridGame(vector<vector<int>>& grid) {
+        // long long ans=INT_MAX;
+        int n=grid[0].size();
+        long long mini=LONG_MAX;
+        long long top=0;
+        long long bottom=0;
+
+        for(int i=0; i<n; i++){
+            top=top+grid[0][i];
+        }
+        for(int i=0; i<n; i++){
+            top=top-grid[0][i];
+            mini= min(mini, max(top, bottom));
+            bottom=bottom+grid[1][i];
+        }
+        return mini;
+    }
+};

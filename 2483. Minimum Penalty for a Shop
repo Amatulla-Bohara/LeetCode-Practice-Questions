@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int bestClosingTime(string customers) {
+        int mini=INT_MAX;
+        int sum=0;
+        int n=customers.size();
+        int index=0;
+
+        for(int i=0; i<n; i++){
+            if(customers[i]=='Y')sum=sum+1;
+        }
+
+        for(int i=0; i<=n; i++){
+            if(mini>sum){
+                mini=sum;
+                index=i;
+            }
+            if(customers[i]=='Y')sum=sum-1;
+            else sum=sum+1;
+        }
+
+        return index;
+    }
+};

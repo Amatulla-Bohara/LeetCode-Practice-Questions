@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> decompressRLElist(vector<int>& nums) {
+        vector<int> ans;
+        int i=0;
+
+        while(i<nums.size()){
+            int freq=nums[i];
+            int n=nums[i+1];
+            for(int j=0; j<freq; j++){
+                ans.push_back(n);
+            }
+            i=i+2;
+        }
+        return ans;
+    }
+};

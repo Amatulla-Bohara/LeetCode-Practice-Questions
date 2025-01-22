@@ -1,0 +1,70 @@
+class Solution {
+public:
+    vector<vector<int>> highestPeak(vector<vector<int>>& mat) {
+        // vector<vector<int>> ans;
+        int m=mat.size();
+        int n=mat[0].size();
+        int level=0;
+        vector<vector<int>> height(m, vector<int>(n,0));
+        vector<vector<bool>> visited(m, vector<bool>(n,false));
+
+        queue<pair<int,int>>q;
+
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(mat[i][j]==1){
+                    q.push(make_pair(i,j));
+                    visited[i][j]=true;
+                }
+            }
+        }
+        
+        while(!q.empty()){
+            int s=q.size();
+            for(int i=0; i<s; i++){
+                pair<int, int> curr=q.front();
+                int x=curr.first;
+                int y=curr.second;
+                q.pop();
+                    if(y-1>=0 && y-1<n){
+                        int newX=x;
+                        int newY=y-1;
+                        if(visited[newX][newY]!=true){
+                            visited[newX][newY]=true;
+                            q.push(make_pair(newX,newY));
+                            height[newX][newY]=level+1;
+                        }
+                    }
+                    if(y+1>=0 && y+1<n){
+                        int newX=x;
+                        int newY=y+1;
+                        if(visited[newX][newY]!=true){
+                            visited[newX][newY]=true;
+                            q.push(make_pair(newX,newY));
+                            height[newX][newY]=level+1;
+                        }
+                    }
+                    if(x-1>=0 && x-1<m){
+                        int newX=x-1;
+                        int newY=y;
+                        if(visited[newX][newY]!=true){
+                            visited[newX][newY]=true;
+                            q.push(make_pair(newX,newY));
+                            height[newX][newY]=level+1;
+                        }
+                    }
+                    if(x+1>=0 && x+1<m){
+                        int newX=x+1;
+                        int newY=y;
+                        if(visited[newX][newY]!=true){
+                            visited[newX][newY]=true;
+                            q.push(make_pair(newX,newY));
+                            height[newX][newY]=level+1;
+                        }
+                    }
+            }
+            level++;
+        }
+        return height;
+    }
+};

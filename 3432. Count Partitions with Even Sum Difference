@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int countPartitions(vector<int>& nums) {
+        int ans=0;
+        int forward_sum=0;
+        vector<int> sum(nums.size(),0);
+        sum[nums.size()-1]=nums[nums.size()-1];
+
+        for(int i=nums.size()-2; i>=0; i--){
+            sum[i]=sum[i+1]+nums[i];
+        }
+
+        for(int i=0; i<nums.size()-1; i++){
+            forward_sum=nums[i]+forward_sum;
+            if(abs(forward_sum - sum[i+1]) % 2 ==0)ans++;
+        }
+        return ans;
+    }
+};

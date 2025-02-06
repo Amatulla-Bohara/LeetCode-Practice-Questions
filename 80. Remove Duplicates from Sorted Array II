@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int k=0;
+        unordered_map<int,int> mp;
+
+        for(auto m:nums){
+            mp[m]++;
+            if(mp[m]<=2)nums[k++]=m;
+        }
+        return k;
+    }
+};
+
+or
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int count = 0, j = 1;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] != nums[i - 1]) {
+                count = 0;
+                nums[j++] = nums[i];
+            } else {
+                count++;
+                if (count <= 1) nums[j++] = nums[i];
+            }
+        }
+        return j; 
+    }
+};
+
+        
+    

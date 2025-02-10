@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string clearDigits(string s) {
+        int n=s.size();
+        stack<char> st;
+        string ans="";
+        string rst="";
+        for(int i=0; i<n; i++){
+            if(s[i]=='0' || s[i]=='1' || s[i]=='2' || s[i]=='3' || s[i]=='4' || s[i]=='5' || s[i]=='6' || s[i]=='7' || s[i]=='8' || s[i]=='9'){
+                st.pop();
+            }
+            else st.push(s[i]);
+        }
+        while(!st.empty()){
+            ans=ans+st.top();
+            st.pop();
+        }
+        int k=ans.size();
+        for(int i=k-1; i>=0; i--){
+            rst=rst+ans[i];
+        }
+        return rst;
+    }
+};

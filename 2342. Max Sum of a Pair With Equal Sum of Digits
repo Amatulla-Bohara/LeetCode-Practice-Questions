@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int maximumSum(vector<int>& nums) {
+        int maxi=INT_MIN;
+        int n=nums.size();
+        unordered_map<int,int> mp;
+        unordered_map<int,vector<int>> frq;
+
+        for(int i=0; i<n; i++){
+            int k=nums[i];
+            int sum=0;
+            while(k){
+                sum=sum+(k%10);
+                k=k/10;
+            }
+            mp[nums[i]]=sum;
+            frq[sum].push_back(nums[i]);
+        }
+        for(auto& val:frq){
+            int m=val.second.size();
+            if(m>1){
+                int highest=INT_MIN;
+                int sec=INT_MIN;
+                int total;
+                for(int i=0; i<m; i++){
+                    if(val.second[i]>highest){
+                        sec=highest;
+                        highest=val.second[i];
+                    }
+                    else if(val.second[i]>sec){
+                        sec=val.second[i];
+                    }
+                }
+                total=highest+sec;
+                maxi=max(maxi,total);
+            }
+        }
+        
+        return max(-1,maxi);
+    }
+};

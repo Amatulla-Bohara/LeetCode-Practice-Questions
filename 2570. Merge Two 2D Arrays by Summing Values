@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+        int n=nums1.size();
+        int m=nums2.size();
+        vector<vector<int>> final_ans;
+        vector<int> ans;
+        map<int,int> mp;
+
+        for(int i=0; i<n; i++){
+            mp[nums1[i][0]]=nums1[i][1];
+        }
+        for(int i=0; i<m; i++){
+            if(mp.find(nums2[i][0])!=mp.end())mp[nums2[i][0]]+=nums2[i][1];
+            else mp[nums2[i][0]]=nums2[i][1];
+        }
+        for(auto x:mp){
+            ans.push_back(x.first);
+            ans.push_back(x.second);
+            final_ans.push_back(ans);
+            ans.clear();
+        }
+        return final_ans;
+    }
+};
